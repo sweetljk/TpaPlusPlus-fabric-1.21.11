@@ -1,0 +1,42 @@
+# ── 此文件是模板，请复制为 gradle.properties 后修改 ──
+# ── Copy this file to gradle.properties and edit as needed ──
+
+# Gradle JVM 参数
+org.gradle.jvmargs=-Xmx2G
+
+# 如需指定 JDK 路径（IDEA 中建议在 Settings → Gradle 里设置），取消下行注释
+# If you need to specify a JDK path, uncomment below (prefer setting it in IDEA: Settings → Gradle)
+# org.gradle.java.home=C\:\\path\\to\\jdk-21
+
+# ── 以下为 Minecraft / Fabric 版本，一般情况下无需修改 ──
+# ── Minecraft / Fabric versions — usually no need to change ──
+minecraftVersion=1.21.11
+loaderVersion=0.19.2
+kotlinLoaderVersion=1.12.1+kotlin.2.0.20
+fabricVersion=0.141.4+1.21.11
+architecturyApiVersion=19.0.1
+
+# ── 模组元数据 ──
+# ── Mod metadata ──
+modVersion = 1.0.0
+mavenGroup = net.superricky
+modId = tpaplusplus
+modName = TPAPlusPlus
+
+# ── 代理配置（中国大陆用户无法下载依赖时使用） ──
+# ── Proxy for Chinese mainland users ──
+# 如果你使用 Clash，端口一般是 7890
+# 如果你使用 V2Ray / sing-box，端口一般是 10808 或 10809
+# Clash → port 7890; V2Ray / sing-box → port 10808 or 10809
+#
+# 取消下面的注释并改为你的代理地址和端口：
+# Uncomment and set your proxy host and port:
+#
+# systemProp.http.proxyHost=127.0.0.1
+# systemProp.http.proxyPort=7890
+# systemProp.https.proxyHost=127.0.0.1
+# systemProp.https.proxyPort=7890
+
+# TLS 兼容（如遇到 "Remote host terminated the handshake" 错误）
+# TLS compatibility — try this if you see "Remote host terminated the handshake"
+# -Dhttps.protocols=TLSv1.2
