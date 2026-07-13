@@ -39,17 +39,6 @@ object AcceptCommand : AsyncCommand(), BuildableCommand {
     override fun getMinDistance(): Double = CommandDistanceSpec.acceptDistance.get()
 
     private fun acceptCommandWithTarget(context: Context): Int {
-        fun asyncCommandCallback(result: AsyncCommandEvent, asyncCommandData: AsyncCommandData) {
-            val asyncRequest = asyncCommandData.getRequest()
-            if (result == AsyncCommandEvent.REQUEST_AFTER_DELAY) {
-                val sender = asyncRequest.sender
-                val receiver = asyncRequest.receiver!!
-                if (AsyncCommandHelper.acceptRequest(sender, receiver) == AsyncCommandEvent.REQUEST_NOT_FOUND) {
-                    CommandHelper.requestNotFound(sender, receiver)
-                }
-            }
-        }
-
         val source = context.source
         val (result, sender, receiver) = checkSenderReceiver(context)
         if (result != CommandResult.NORMAL) return result.status

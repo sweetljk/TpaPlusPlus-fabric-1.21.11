@@ -4,6 +4,7 @@ import net.minecraft.world.World
 import com.uchuhimo.konf.RequiredItem
 import kotlinx.coroutines.launch
 import net.minecraft.entity.player.PlayerEntity
+
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.text.MutableText
@@ -19,7 +20,7 @@ import net.superricky.tpaplusplus.config.language.WindupSpec
 
 fun String.literal(): MutableText = Text.literal(this)
 fun String.translate(): MutableText = Text.translatable(this)
-fun String.getWorld(): ServerDimension =
+fun String.toDimensionKey(): ServerDimension =
     RegistryKey.of(RegistryKeys.WORLD, Identifier.of(this))
 
 fun PlayerEntity.toggleOn() = TpaPlusPlus.launch {
@@ -31,7 +32,7 @@ fun PlayerEntity.toggleOff() = TpaPlusPlus.launch {
 }
 
 fun PlayerEntity.getColoredName(color: Style): MutableText? = this.name.literalString?.literal()?.setStyle(color)
-fun PlayerEntity.getDimension(): ServerDimension = World.OVERWORLD
+fun PlayerEntity.getDimension(): ServerDimension = this.getEntityWorld().getRegistryKey()
 
 fun PlayerEntity.sendMessageWithPlayerName(
     translateKey: RequiredItem<String>,

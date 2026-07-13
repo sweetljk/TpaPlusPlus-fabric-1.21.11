@@ -5,7 +5,6 @@ import dev.architectury.event.events.common.TickEvent
 import kotlinx.coroutines.cancel
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayerEntity
-import net.superricky.tpaplusplus.GlobalConst.PERMISSION_LEVEL
 import net.superricky.tpaplusplus.GlobalConst.logger
 import net.superricky.tpaplusplus.TpaPlusPlus
 import net.superricky.tpaplusplus.TpaPlusPlus.coroutineContext

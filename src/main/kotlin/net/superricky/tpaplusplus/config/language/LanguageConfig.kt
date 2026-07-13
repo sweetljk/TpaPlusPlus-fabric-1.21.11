@@ -18,6 +18,7 @@ import net.superricky.tpaplusplus.config.language.error.ErrorRequestSpec
 import net.superricky.tpaplusplus.config.language.error.ErrorSpec
 import java.nio.file.Files
 import kotlin.io.path.Path
+import java.nio.charset.StandardCharsets
 
 object LanguageConfig {
     private lateinit var config: Config
@@ -48,7 +49,28 @@ object LanguageConfig {
                 Platform.getConfigFolder().resolve(LANG_FOLDER_PATH).resolve(languageFileName).toFile()
             )
             .from.env()
+        // Force re-read language file with UTF-8 to fix garbled Chinese on Windows (GBK default charset)
+        loadCustomLangFile()
         config.validateRequired()
+    }
+
+    /**
+     * Re-read the language file with explicit UTF-8 encoding to override
+     * any values that were garbled by Konf's default-charset file reading.
+     * This is needed on Windows where the JVM default charset is GBK.
+     */
+    private fun loadCustomLangFile() {
+        val langFile = Platform.getConfigFolder()
+            .resolve(LANG_FOLDER_PATH)
+            .resolve(languageFileName)
+            .toFile()
+        if (!langFile.exists()) return
+        try {
+            val content = langFile.readText(StandardCharsets.UTF_8)
+            config.from.toml.reader(content.reader())
+        } catch (e: Exception) {
+            logger.warn("Failed to load language file with UTF-8: ${e.message}")
+        }
     }
 
     fun addLoadListener(listener: Function1<Source, Unit>) {
@@ -82,7 +104,13 @@ object LanguageConfig {
     fun RequiredItem<String>.getMutableText(vararg args: Any?): MutableText {
         var message = config[this]
         for (arg in args) {
-            message = message.replaceFirst("%s", arg?.toString() ?: "null")
+            // Use .string for Text components to get plain text content
+            // instead of raw component serialization (literal(...)[style=...])
+            val replacement = when (arg) {
+                is Text -> arg.string
+                else -> arg?.toString() ?: "null"
+            }
+            message = message.replaceFirst("%s", replacement)
         }
         return Text.literal(message)
     }

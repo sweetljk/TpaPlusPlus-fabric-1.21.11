@@ -68,6 +68,12 @@ loom {
             sourceSet("client")
         }
     }
+
+    runConfigs {
+        configureEach {
+            vmArgs.add("-Dfile.encoding=UTF-8")
+        }
+    }
 }
 
 tasks {

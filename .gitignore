@@ -37,3 +37,4 @@ replay_pid*
 # ── Misc ──
 *.ctxt
 .mtj.tmp/
+CLAUDE.md
