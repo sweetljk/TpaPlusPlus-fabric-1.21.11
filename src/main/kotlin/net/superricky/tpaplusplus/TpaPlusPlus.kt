@@ -31,6 +31,8 @@ object TpaPlusPlus : ModInitializer, CoroutineScope {
     lateinit var dataService: DataService
 
     override fun onInitialize() {
+        // Force UTF-8 to prevent Chinese text garbled on Windows (GBK default charset)
+        System.setProperty("file.encoding", "UTF-8")
         init()
     }
 

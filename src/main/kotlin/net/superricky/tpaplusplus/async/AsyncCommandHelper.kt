@@ -4,7 +4,6 @@ import kotlinx.atomicfu.AtomicBoolean
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
 import java.util.EnumSet
-import net.minecraft.entity.Entity
 import net.minecraft.network.packet.s2c.play.PositionFlag
 import net.minecraft.server.network.ServerPlayerEntity
 import net.superricky.tpaplusplus.GlobalConst.ONE_SECOND
@@ -16,7 +15,7 @@ import net.superricky.tpaplusplus.config.language.LanguageConfig.getMutableText
 import net.superricky.tpaplusplus.config.language.command.BackSpec
 import net.superricky.tpaplusplus.utility.TextColorPallet
 import net.superricky.tpaplusplus.utility.getDimension
-import net.superricky.tpaplusplus.utility.getWorld
+import net.superricky.tpaplusplus.utility.toDimensionKey
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
@@ -36,12 +35,10 @@ object AsyncCommandHelper : CoroutineScope {
         tickDelay = ONE_SECOND / tickRate
         mainLoopJob = launch {
             while (isActive && ticking.value) {
-                launch {
-                    try {
-                        runTick()
-                    } catch (e: Exception) {
-                        logger.error(e)
-                    }
+                try {
+                    runTick()
+                } catch (e: Exception) {
+                    logger.error(e)
                 }
                 delay(tickDelay)
             }
@@ -186,7 +183,7 @@ object AsyncCommandHelper : CoroutineScope {
     private fun ServerPlayerEntity.backTeleport() {
         val lastDeathPos = TpaPlusPlus.dataService.getPlayerData(this@backTeleport).lastDeathPos
         this@backTeleport.teleport(
-            TpaPlusPlus.server.getWorld(lastDeathPos.world.getWorld()),
+            TpaPlusPlus.server.getWorld(lastDeathPos.world.toDimensionKey()),
             lastDeathPos.x,
             lastDeathPos.y,
             lastDeathPos.z,

@@ -11,6 +11,7 @@ import net.superricky.tpaplusplus.utility.Context
 import net.superricky.tpaplusplus.utility.LiteralNode
 import net.superricky.tpaplusplus.utility.TextColorPallet
 import net.superricky.tpaplusplus.utility.literal
+import java.net.URI
 
 object RootCommand : BuildableCommand {
     override fun build(): LiteralNode =
@@ -37,7 +38,7 @@ object RootCommand : BuildableCommand {
                 SystemSpec.githubBase.getMutableText(
                     SystemSpec.githubView.getMutableText()
                         .setStyle(TextColorPallet.secondaryVariant)
-                        .styled { it }
+                        .styled { it.withClickEvent(ClickEvent.OpenUrl(URI.create(GlobalConst.GITHUB_URL))) }
                 ).setStyle(TextColorPallet.primaryVariant)
             },
             false
@@ -47,17 +48,17 @@ object RootCommand : BuildableCommand {
                 SystemSpec.modrinthBase.getMutableText(
                     SystemSpec.modrinthView.getMutableText()
                         .setStyle(TextColorPallet.secondaryVariant)
-                        .styled { it }
+                        .styled { it.withClickEvent(ClickEvent.OpenUrl(URI.create(GlobalConst.MODRINTH_URL))) }
                 ).setStyle(TextColorPallet.primaryVariant)
             },
             false
         )
         source.sendFeedback(
             {
-                SystemSpec.courseforgeBase.getMutableText(
-                    SystemSpec.courseforgeView.getMutableText()
+                SystemSpec.curseforgeBase.getMutableText(
+                    SystemSpec.curseforgeView.getMutableText()
                         .setStyle(TextColorPallet.secondaryVariant)
-                        .styled { it }
+                        .styled { it.withClickEvent(ClickEvent.OpenUrl(URI.create(GlobalConst.CURSEFORGE_URL))) }
                 ).setStyle(TextColorPallet.primaryVariant)
             },
             false

@@ -44,6 +44,9 @@ class LevelBoundVec3(
                     )
                 )
             }
+            // Different dimensions and neither is the nether (e.g. overworld vs end)
+            // — no meaningful distance; return max value so distance checks fail
+            return Double.MAX_VALUE
         }
         return distanceTo(other)
     }

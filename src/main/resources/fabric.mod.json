@@ -3,15 +3,16 @@
     "id": "tpaplusplus",
     "version": "${version}",
     "name": "TPA++",
-    "description": "Compatible, customisable, user friendly TPA mod for Forge, Fabric, NeoForge and Quilt.",
+    "description": "TPA++ - Customizable teleport request mod | 可自定义的传送请求模组",
     "authors": [
         "SuperRicky14",
-        "Half_nothing"
+        "Half_nothing",
+        "sweetljk"
     ],
     "contact": {
-        "modrinth": "https://modrinth.com/mod/tpa++",
+        "modrinth": "https://modrinth.com/mod/tpa%2B%2B",
         "curseforge": "https://www.curseforge.com/minecraft/mc-mods/tpaplusplus",
-        "sources": "https://github.com/SuperRicky14/TpaPlusPlus"
+        "sources": "https://github.com/sweetljk/TpaPlusPlus-fabric-1.21.11"
     },
     "license": "MIT",
     "icon": "assets/tpaplusplus/icon.png",

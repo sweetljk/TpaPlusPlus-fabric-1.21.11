@@ -43,11 +43,11 @@ object BackCommand : AsyncCommand(), BuildableCommand {
             )
             return CommandResult.NORMAL.status
         }
-        if (!LimitationHelper.checkDimensionLimitation(sender, lastDeathPos.world.getWorld())) {
+        if (!LimitationHelper.checkDimensionLimitation(sender, lastDeathPos.world.toDimensionKey())) {
             sender.sendMessage(
                 ErrorSpec.crossDim.getMutableText(
                     sender.getDimension().value.toString().literal().setStyle(TextColorPallet.errorVariant),
-                    lastDeathPos.world.getWorld().value.toString().literal().setStyle(TextColorPallet.errorVariant)
+                    lastDeathPos.world.toDimensionKey().value.toString().literal().setStyle(TextColorPallet.errorVariant)
                 ).setStyle(TextColorPallet.error)
             )
             return CommandResult.NORMAL.status

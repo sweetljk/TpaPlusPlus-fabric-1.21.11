@@ -26,7 +26,7 @@ waitTimeBeforeTp = 0.0
 # Or you can execute the command '/tpaplusplus reload message' manually to make it take effect
 # Tips: Edit which language file which be used need a restart or manually execute command
 # Tips: But edit language file itself do not need a restart
-language = "en_us"
+language = "zh_cn"
 
 [common.color]
 # Colors in hex format
